@@ -1,0 +1,11 @@
+monai
+nibabel
+torch
+torchvision
+xgboost
+numpy
+pandas
+scikit-learn
+matplotlib
+seaborn
+openpyxl
