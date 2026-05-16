@@ -1,4 +1,3 @@
-
 # Alzheimer's MRI Classification & Progression Prediction
 
 This repository contains multiple deep learning and hybrid machine learning pipelines for Alzheimer's Disease classification and progression analysis using MRI scans and clinical data from the OASIS dataset.
@@ -92,7 +91,37 @@ Performs direct Alzheimer's classification using MRI scans with a CNN-based arch
 
 ---
 
-# 3. Hybrid CNN + XGBoost Pipeline
+# 3. TLSTM Longitudinal Modeling
+
+## Files
+- `tlstm/TLSTM_Train.ipynb`
+- `tlstm/TLSTM_Test.ipynb`
+
+## Purpose
+Uses Time-aware LSTM (TLSTM) for modeling longitudinal disease progression across patient visits.
+
+## Features
+- Sequential patient visit modeling
+- Temporal interval handling
+- Clinical feature integration
+- PCA + StandardScaler preprocessing
+
+## Workflow
+
+### Training Notebook
+- Loads training embeddings
+- Preprocesses sequential data
+- Trains TLSTM model
+- Saves trained weights
+
+### Testing Notebook
+- Loads trained model
+- Runs inference on test data
+- Generates predictions and evaluation metrics
+
+---
+
+# 4. Hybrid CNN + XGBoost Pipeline
 
 ## File
 `hybrid-cnn-xgboost/cnn_xgboost_pipeline.ipynb`
@@ -117,35 +146,6 @@ Combines deep MRI embeddings with XGBoost for improved classification performanc
 - Trained XGBoost model
 - Cross-validation scores
 - Metrics and reports
-
----
-
-# 4. TLSTM Longitudinal Modeling
-
-## Files
-- `tlstm/TLSTM_Train.ipynb`
-- `tlstm/TLSTM_Test.ipynb`
-
-## Purpose
-Uses Time-aware LSTM (TLSTM) for modeling longitudinal disease progression across patient visits.
-
-## Features
-- Sequential patient visit modeling
-- Temporal interval handling
-- Clinical feature integration
-- PCA + StandardScaler preprocessing
-
-## Workflow
-### Training Notebook
-- Loads training embeddings
-- Preprocesses sequential data
-- Trains TLSTM model
-- Saves trained weights
-
-### Testing Notebook
-- Loads trained model
-- Runs inference on test data
-- Generates predictions and evaluation metrics
 
 ---
 
@@ -181,6 +181,7 @@ pip install monai nibabel xgboost torch torchvision scikit-learn pandas numpy ma
 # Running the Pipelines
 
 ## Step 1 — Feature Extraction
+
 Run:
 
 ```text
@@ -194,25 +195,28 @@ This generates MRI feature embeddings.
 ## Step 2 — Choose a Modeling Approach
 
 ### Option A: Pure CNN Classification
+
 Run:
 
 ```text
 cnn-classification/CNNClassification.ipynb
 ```
 
-### Option B: CNN + XGBoost Hybrid
-Run:
+### Option B: Longitudinal TLSTM
 
-```text
-hybrid-cnn-xgboost/cnn_xgboost_pipeline.ipynb
-```
-
-### Option C: Longitudinal TLSTM
 Run:
 
 ```text
 tlstm/TLSTM_Train.ipynb
 tlstm/TLSTM_Test.ipynb
+```
+
+### Option C: CNN + XGBoost Hybrid
+
+Run:
+
+```text
+hybrid-cnn-xgboost/cnn_xgboost_pipeline.ipynb
 ```
 
 ---
@@ -223,16 +227,6 @@ tlstm/TLSTM_Test.ipynb
 - Update dataset paths before running.
 - GPU acceleration is strongly recommended.
 - Ensure MRI preprocessing is completed before feature extraction.
-
----
-
-# Future Improvements
-
-- Add attention-based temporal models
-- Add Grad-CAM explainability
-- Deploy with FastAPI backend
-- Create inference API for clinical usage
-- Add experiment tracking with Weights & Biases
 
 ---
 
